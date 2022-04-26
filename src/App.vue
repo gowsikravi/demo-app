@@ -1,35 +1,37 @@
 <template>
   <div id="app">
-    Red team count:{{redTeamCount}}
-    Blue team count:{{blueTeamCount}}
-    <players-input/>
-    <team-viewer teamName="blue"/>
+    <div id="list">
+      <div id="list-item" @click="loadHome">Add Players</div>
+      <div id="list-item" @click="loadAbout">View Teams</div>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import PlayersInput from './components/PlayersInput.vue'
-import TeamViewer from './components/TeamViewer.vue'
-import {mapGetters, mapState} from 'vuex';
 
 export default {
   name:"App",
-  components: {
-    PlayersInput,
-    TeamViewer
-  },
-  computed:{
-    ...mapGetters(["getBlueTeam", "getRedTeam"]),
-    ...mapState(["players"]),
-    blueTeamCount(){
-      return this.getBlueTeam.length;
+  methods:{
+    loadAbout(){
+      this.$router.push({name:"AboutTeam", params:{ teamName:"red", test:"test" }})
     },
-    redTeamCount(){
-      return this.getRedTeam.length;
+    loadHome(){
+      this.$router.push({name:"Home"})
     }
   }
 }
 </script>
 
 <style>
+#list{
+  border:solid 1px;
+  display: flex;
+  padding: 2px;
+}
+#list-item{
+  margin-right: 10px;
+  border: solid 1px red;
+  padding: 5px;
+}
 </style>

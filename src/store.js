@@ -27,6 +27,7 @@ export default new Vuex.Store({
             team: "red"
         }
     ],
+    teams:["blue", "red"]
   },
   getters : {
     getBlueTeam({players}){
@@ -40,6 +41,9 @@ export default new Vuex.Store({
     },
     getPlayersByTeam : ({players})=>(teamName)=> {
         return players.filter((player)=>player.team == teamName);
+    },
+    getDefaultTeam ({teams}){
+        return teams[0];
     }
   },
   mutations: {
